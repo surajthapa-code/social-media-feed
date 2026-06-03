@@ -1,6 +1,4 @@
-import Sidebar from './components/Sidebar';
-import Feed from './components/Feed';
-import Trending from './components/Trending';
+import { Feed,Trending,Sidebar } from "./components";
 
 export default function App() {
   return (
