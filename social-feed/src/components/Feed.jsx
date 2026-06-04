@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Post from "./Post";
+import CreatePost from "./CreatePost";
 
 const initialPosts = [
   {
@@ -42,8 +43,22 @@ function Feed() {
     });
     setPosts(updatedPosts);
   }
+
+  const handleAddPost = (postText) => {
+    const newPost = {
+      id: posts.length + 1,
+      user: "My Account",
+      avatarInitial: "M",
+      time: "just now",
+      content: postText,
+      likes: 23,
+    };
+    setPosts([newPost, ...posts]);
+  };
+
   return (
     <>
+      <CreatePost onAddPost={handleAddPost} />
       <h2>Feed </h2>
       {posts.map((post) => (
         <Post key={post.id} data={post} onLike={() => handleClicks(post.id)} />
