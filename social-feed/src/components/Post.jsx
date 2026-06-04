@@ -1,11 +1,10 @@
-export default function Post(props) {
-    const {key,data} = props;
-    return (
-    <div key={key} className="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-4 shadow-sm">
-      
-      {/* Header: Avatar and User Info */}
+export default function Post({ data, onLike }) {
+  return (
+    <div
+      key={data.id}
+      className="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-4 shadow-sm"
+    >
       <div className="flex items-center mb-3">
-        {/* Fake Avatar */}
         <div className="w-10 h-10 rounded-full bg-blue-600 mr-3 flex items-center justify-center font-bold">
           {data.avatarInitial}
         </div>
@@ -15,21 +14,19 @@ export default function Post(props) {
         </div>
       </div>
 
-      {/* Body: Post Content */}
-      <p className="text-gray-200 text-sm mb-4">
-        {data.content}
-      </p>
+      <p className="text-gray-200 text-sm mb-4">{data.content}</p>
 
-      {/* Footer: Action Buttons */}
       <div className="flex items-center text-gray-400 text-sm border-t border-gray-700 pt-3">
-        <button className="hover:text-blue-400 transition-colors flex items-center mr-6">
+        <button
+          onClick={onLike}
+          className="hover:text-blue-400 transition-colors flex items-center mr-6"
+        >
           <span className="mr-1">❤️</span> {data.likes}
         </button>
         <button className="hover:text-blue-400 transition-colors flex items-center">
           <span className="mr-1">💬</span> Comment
         </button>
       </div>
-      
     </div>
   );
 }

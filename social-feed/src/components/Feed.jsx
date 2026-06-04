@@ -1,6 +1,7 @@
+import { useState } from "react";
 import Post from "./Post";
 
-const mockPosts = [
+const initialPosts = [
   {
     id: 1,
     user: "Peter Parker",
@@ -31,11 +32,21 @@ const mockPosts = [
 ];
 
 function Feed() {
+  const [posts, setPosts] = useState(initialPosts);
+  function handleClicks(postID) {
+    const updatedPosts = posts.map((post) => {
+      if (post.id === postID) {
+        return { ...post, likes: post.likes + 1 };
+      }
+      return post;
+    });
+    setPosts(updatedPosts);
+  }
   return (
     <>
       <h2>Feed </h2>
-      {mockPosts.map((post) => (
-        <Post key={post.id} data={post} />
+      {posts.map((post) => (
+        <Post key={post.id} data={post} onLike={() => handleClicks(post.id)} />
       ))}
     </>
   );
