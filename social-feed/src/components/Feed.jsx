@@ -13,13 +13,21 @@ function Feed() {
   const handleAddPost = (postText) => {
     dispatch({ type: "ADD_POST", payload: postText });
   };
+  const handleDeletePost = (postId) => {
+    dispatch({ type: "DELETE_POST", payload: postId });
+  };
 
   return (
     <>
       <CreatePost onAddPost={handleAddPost} />
       <h2>Feed </h2>
       {posts.map((post) => (
-        <Post key={post.id} data={post} onLike={() => handleClicks(post.id)} />
+        <Post
+          key={post.id}
+          data={post}
+          onDelete={() => handleDeletePost(post.id)}
+          onLike={() => handleClicks(post.id)}
+        />
       ))}
     </>
   );

@@ -45,7 +45,6 @@ function reducer(state, action) {
       return [newPost, ...state];
     }
     case "DELETE_POST":
-      // Filter out the post where the ID matches the payload
       return state.filter((post) => post.id !== action.payload);
 
     case "LIKE_POST":

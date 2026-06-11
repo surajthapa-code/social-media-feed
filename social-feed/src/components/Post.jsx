@@ -1,4 +1,4 @@
-export default function Post({ data, onLike }) {
+export default function Post({ data, onLike, onDelete }) {
   return (
     <div
       key={data.id}
@@ -25,6 +25,12 @@ export default function Post({ data, onLike }) {
         </button>
         <button className="hover:text-blue-400 transition-colors flex items-center">
           <span className="mr-1">💬</span> Comment
+        </button>
+        <button
+          onClick={onDelete}
+          className="hover:text-blue-400 transition-colors flex items-center"
+        >
+          <span className="mr-1">🚨</span> Delete
         </button>
       </div>
     </div>
