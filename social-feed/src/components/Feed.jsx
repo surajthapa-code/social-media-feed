@@ -1,59 +1,17 @@
-import { useState } from "react";
+import { useContext } from "react";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
-
-const initialPosts = [
-  {
-    id: 1,
-    user: "Peter Parker",
-    avatarInitial: "P",
-    time: "2 hours ago",
-    content:
-      "This is my first static post on my new platform! Preparing for the full-stack MERN integration.",
-    likes: 0,
-  },
-  {
-    id: 2,
-    user: "Tony Stark",
-    avatarInitial: "T",
-    time: "4 hours ago",
-    content:
-      "Just finished building a new AI cluster. React 19 compiler is looking incredibly optimized.",
-    likes: 3000,
-  },
-  {
-    id: 3,
-    user: "Bruce Wayne",
-    avatarInitial: "B",
-    time: "1 day ago",
-    content:
-      "Dark mode is the only acceptable UI theme. Good job on the Tailwind setup.",
-    likes: 104,
-  },
-];
+import { PostContext } from "../costexts/PostContext";
 
 function Feed() {
-  const [posts, setPosts] = useState(initialPosts);
+  const { posts, dispatch } = useContext(PostContext);
+
   function handleClicks(postID) {
-    const updatedPosts = posts.map((post) => {
-      if (post.id === postID) {
-        return { ...post, likes: post.likes + 1 };
-      }
-      return post;
-    });
-    setPosts(updatedPosts);
+    dispatch({ type: "LIKE_POST", payload: postID });
   }
 
   const handleAddPost = (postText) => {
-    const newPost = {
-      id: posts.length + 1,
-      user: "My Account",
-      avatarInitial: "M",
-      time: "just now",
-      content: postText,
-      likes: 23,
-    };
-    setPosts([newPost, ...posts]);
+    dispatch({ type: "ADD_POST", payload: postText });
   };
 
   return (
