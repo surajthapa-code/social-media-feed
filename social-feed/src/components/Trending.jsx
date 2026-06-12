@@ -1,31 +1,12 @@
-import { useEffect, useState } from "react";
+import useFetch from "../hooks/useFetch";
 
 function Trending() {
-  const [news, setNews] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await fetch(
-          "https://hn.algolia.com/api/v1/search?tags=front_page",
-        );
-        if (!response.ok) {
-          isError(true);
-          throw new Error("an error accured", Error);
-        }
-        const dataSet = await response.json();
-        setNews(dataSet.hits.slice(0, 10));
-        setIsError(false);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-        setIsError(true);
-      }
-    };
-    fetchNews();
-  }, []);
+  const {
+    data: rawData,
+    isError,
+    isLoading,
+  } = useFetch("https://hn.algolia.com/api/v1/search?tags=front_page");
+  const news = rawData && rawData.hits ? rawData.hits.slice(0, 10) : [];
   return (
     <div className="flex flex-col">
       <h2 className="text-xl font-bold mb-4 border-b border-gray-700 pb-2">
