@@ -1,33 +1,49 @@
 export default function Post({ data, onLike, onDelete }) {
   return (
-    <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-4 shadow-sm">
-      <div className="flex items-center mb-3">
-        <div className="w-10 h-10 rounded-full bg-blue-600 mr-3 flex items-center justify-center font-bold">
+    <div className="bg-gray-800/95 border border-gray-700 rounded-xl p-4 mb-4 shadow-md hover:border-gray-600 hover:shadow-lg transition-all duration-200">
+      {/* Header */}
+      <div className="flex items-center mb-4">
+        <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mr-3 flex items-center justify-center font-bold text-white shadow">
           {data.avatarInitial}
         </div>
-        <div>
-          <h3 className="font-bold text-white text-sm">{data.user}</h3>
-          <p className="text-xs text-gray-400">{data.time}</p>
+
+        <div className="flex flex-col">
+          <h3 className="font-semibold text-white text-sm tracking-wide">
+            {data.user}
+          </h3>
+
+          <p className="text-xs text-gray-400">
+            {data.time}
+          </p>
         </div>
       </div>
 
-      <p className="text-gray-200 text-sm mb-4">{data.content}</p>
+      {/* Content */}
+      <p className="text-gray-200 text-sm leading-relaxed mb-4">
+        {data.content}
+      </p>
 
-      <div className="flex items-center text-gray-400 text-sm border-t border-gray-700 pt-3">
+      {/* Actions */}
+      <div className="flex items-center gap-3 border-t border-gray-700 pt-3 text-sm">
         <button
           onClick={onLike}
-          className="hover:text-blue-400 transition-colors flex items-center mr-6"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-gray-400 hover:text-pink-400 hover:bg-gray-700/60 transition-all duration-200"
         >
-          <span className="mr-1">❤️</span> {data.likes}
+          <span>❤️</span>
+          <span>{data.likes}</span>
         </button>
-        <button className="hover:text-blue-400 transition-colors flex items-center">
-          <span className="mr-1">💬</span> Comment
+
+        <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-gray-400 hover:text-blue-400 hover:bg-gray-700/60 transition-all duration-200">
+          <span>💬</span>
+          <span>Comment</span>
         </button>
+
         <button
           onClick={onDelete}
-          className="hover:text-blue-400 transition-colors flex items-center"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-gray-400 hover:text-red-400 hover:bg-gray-700/60 transition-all duration-200 ml-auto"
         >
-          <span className="mr-1">🚨</span> Delete
+          <span>🗑️</span>
+          <span>Delete</span>
         </button>
       </div>
     </div>

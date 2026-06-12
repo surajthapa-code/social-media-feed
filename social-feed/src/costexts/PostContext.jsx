@@ -58,6 +58,7 @@ function reducer(state, action) {
   }
 }
 export const PostProvider = ({ children }) => {
+    
   const [posts, dispatch] = useReducer(reducer, initialPosts, (inital) => {
     const savedPosts = localStorage.getItem("social_feed_posts");
     return savedPosts ? JSON.parse(savedPosts) : inital;

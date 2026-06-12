@@ -3,8 +3,9 @@ export default function CreatePost({ onAddPost }) {
     
   const [text, setText] = useState("");
   function handleSubmit(e) {
+    
     e.preventDefault();
-    if (text.trim === "") {
+    if (text.trim() === "") {
       return;
     }
     onAddPost(text);
