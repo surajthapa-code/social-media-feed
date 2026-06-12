@@ -1,18 +1,39 @@
+import { useState } from "react";
 import useFetch from "../hooks/useFetch";
 
 function Trending() {
-  const {
-    data: rawData,
-    isError,
-    isLoading,
-  } = useFetch("https://hn.algolia.com/api/v1/search?tags=front_page");
+  const [searchInput, setSearchInput] = useState("Stock market");
+
+  const [searchUrl, setSearchUrl] = useState(
+    "https://hn.algolia.com/api/v1/search?query=stock market",
+  );
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchInput.trim() === "") return;
+    setSearchUrl(`https://hn.algolia.com/api/v1/search?query=${searchInput}`);
+  };
+  const { data: rawData, isError, isLoading } = useFetch(searchUrl);
   const news = rawData && rawData.hits ? rawData.hits.slice(0, 10) : [];
   return (
     <div className="flex flex-col">
       <h2 className="text-xl font-bold mb-4 border-b border-gray-700 pb-2">
         Trending Tech News
       </h2>
-
+      <form onSubmit={handleSearch} className="mb-4 flex gap-2">
+        <input
+          type="text"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          className="w-full bg-gray-900 border border-gray-700 rounded p-2 text-white focus:outline-none focus:border-blue-500 text-sm"
+          placeholder="Search tech news..."
+        />
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm transition-colors"
+        >
+          Search
+        </button>
+      </form>
       {isLoading && (
         <p className="text-gray-400 animate-pulse text-sm">
           Fetching live headlines...
