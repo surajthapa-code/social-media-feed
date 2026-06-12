@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 
 function Trending() {
@@ -7,11 +7,20 @@ function Trending() {
   const [searchUrl, setSearchUrl] = useState(
     "https://hn.algolia.com/api/v1/search?query=stock market",
   );
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchInput.trim() === "") return;
     setSearchUrl(`https://hn.algolia.com/api/v1/search?query=${searchInput}`);
   };
+  useEffect(() => {
+    const delayedFetch = setTimeout(() => {
+      if (searchInput.trim() === "") return;
+      setSearchUrl(`https://hn.algolia.com/api/v1/search?query=${searchInput}`);
+    }, 600);
+    return () => clearTimeout(delayedFetch);
+  }, [searchInput]);
+
   const { data: rawData, isError, isLoading } = useFetch(searchUrl);
   const news = rawData && rawData.hits ? rawData.hits.slice(0, 10) : [];
   return (
