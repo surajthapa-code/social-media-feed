@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 const initialPosts = [
   {
@@ -44,6 +44,7 @@ function reducer(state, action) {
       };
       return [newPost, ...state];
     }
+
     case "DELETE_POST":
       return state.filter((post) => post.id !== action.payload);
 
@@ -51,10 +52,21 @@ function reducer(state, action) {
       return state.map((post) =>
         post.id === action.payload ? { ...post, likes: post.likes + 1 } : post,
       );
+
+    default:
+      return state;
   }
 }
 export const PostProvider = ({ children }) => {
-  const [posts, dispatch] = useReducer(reducer, initialPosts);
+  const [posts, dispatch] = useReducer(reducer, initialPosts, (inital) => {
+    const savedPosts = localStorage.getItem("social_feed_posts");
+    return savedPosts ? JSON.parse(savedPosts) : inital;
+  });
+
+  useEffect(() => {
+    // Turn the array into a text string and save it to the browser
+    localStorage.setItem("social_feed_posts", JSON.stringify(posts));
+  }, [posts]);
   return (
     <PostContext.Provider value={{ posts, dispatch }}>
       {children}
