@@ -12,7 +12,8 @@ function Trending() {
           "https://hn.algolia.com/api/v1/search?tags=front_page",
         );
         if (!response.ok) {
-          console.error("an error accured", Error);
+          isError(true);
+          throw new Error("an error accured", Error);
         }
         const dataSet = await response.json();
         setNews(dataSet.hits.slice(0, 10));

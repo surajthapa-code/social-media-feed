@@ -18,8 +18,8 @@ export default function CreatePost({ onAddPost }) {
             className="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-blue-500 transition-colors resize-none"
             rows="3"
             placeholder="What's on your mind?"
-            value={text} // The input value is locked to our React state
-            onChange={(e) => setText(e.target.value)} // Every keystroke updates the state
+            value={text} 
+            onChange={(e) => setText(e.target.value)}
           ></textarea>
 
           <div className="flex justify-end mt-3">
