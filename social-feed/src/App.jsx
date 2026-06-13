@@ -1,6 +1,6 @@
 import { Feed, Trending, Sidebar, Profile } from "./components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { PostProvider } from "./costexts/PostContext";
+import { PostProvider } from "./contexts/PostContext";
 
 export default function App() {
   return (

@@ -1,19 +1,25 @@
 import { useContext } from "react";
 import Post from "./Post";
-import CreatePost from "./CreatePost";
-import { PostContext } from "../costexts/PostContext";
+import CreatePost from "./CreatePost.tsx";
+import { PostContext, PostData } from "../contexts/PostContext";
 
 function Feed() {
-  const { posts, dispatch } = useContext(PostContext);
+  const context = useContext(PostContext);
 
-  function handleClicks(postID) {
+  if (!context) {
+    throw new Error("Feed must be used within a PostProvider");
+  }
+
+  const { posts, dispatch } = context;
+
+  function handleClicks(postID: number) {
     dispatch({ type: "LIKE_POST", payload: postID });
   }
 
-  const handleAddPost = (postText) => {
+  const handleAddPost = (postText: string) => {
     dispatch({ type: "ADD_POST", payload: postText });
   };
-  const handleDeletePost = (postId) => {
+  const handleDeletePost = (postId: number) => {
     dispatch({ type: "DELETE_POST", payload: postId });
   };
 
@@ -21,7 +27,7 @@ function Feed() {
     <>
       <CreatePost onAddPost={handleAddPost} />
       <h2>Feed </h2>
-      {posts.map((post) => (
+      {posts.map((post: PostData) => (
         <Post
           key={post.id}
           data={post}

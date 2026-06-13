@@ -1,4 +1,18 @@
-export default function Post({ data, onLike, onDelete }) {
+interface PostData {
+  id: number;
+  user: string;
+  avatarInitial: string;
+  time: string;
+  content: string;
+  likes: number;
+}
+interface postProps {
+  data: PostData;
+  onLike: () => void;
+  onDelete: () => void;
+}
+
+export default function Post({ data, onLike, onDelete }: postProps) {
   return (
     <div className="bg-gray-800/95 border border-gray-700 rounded-xl p-4 mb-4 shadow-md hover:border-gray-600 hover:shadow-lg transition-all duration-200">
       {/* Header */}
@@ -12,9 +26,7 @@ export default function Post({ data, onLike, onDelete }) {
             {data.user}
           </h3>
 
-          <p className="text-xs text-gray-400">
-            {data.time}
-          </p>
+          <p className="text-xs text-gray-400">{data.time}</p>
         </div>
       </div>
 

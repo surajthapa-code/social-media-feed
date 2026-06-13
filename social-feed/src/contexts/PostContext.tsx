@@ -1,4 +1,28 @@
-import { createContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  ReactNode,
+  useEffect,
+  useReducer,
+  Dispatch,
+} from "react";
+
+export interface PostData {
+  id: number;
+  user: string;
+  avatarInitial: string;
+  time: string;
+  content: string;
+  likes: number;
+}
+type PostAction =
+  | { type: "ADD_POST"; payload: string }
+  | { type: "DELETE_POST"; payload: number }
+  | { type: "LIKE_POST"; payload: number };
+
+interface PostContextType {
+  posts: PostData[];
+  dispatch: Dispatch<PostAction>;
+}
 
 const initialPosts = [
   {
@@ -29,9 +53,11 @@ const initialPosts = [
     likes: 104,
   },
 ];
-export const PostContext = createContext();
+export const PostContext = createContext<PostContextType | undefined>(
+  undefined,
+);
 
-function reducer(state, action) {
+function reducer(state: PostData[], action: PostAction): PostData[] {
   switch (action.type) {
     case "ADD_POST": {
       const newPost = {
@@ -57,8 +83,7 @@ function reducer(state, action) {
       return state;
   }
 }
-export const PostProvider = ({ children }) => {
-    
+export const PostProvider = ({ children }: { children: ReactNode }) => {
   const [posts, dispatch] = useReducer(reducer, initialPosts, (inital) => {
     const savedPosts = localStorage.getItem("social_feed_posts");
     return savedPosts ? JSON.parse(savedPosts) : inital;

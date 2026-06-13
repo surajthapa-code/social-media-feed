@@ -1,9 +1,12 @@
-import { useState } from "react";
-export default function CreatePost({ onAddPost }) {
-    
+import { useState, FormEvent } from "react";
+
+interface CreatePostProps {
+  onAddPost: (text: string) => void;
+}
+
+export default function CreatePost({ onAddPost }: CreatePostProps) {
   const [text, setText] = useState("");
-  function handleSubmit(e) {
-    
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (text.trim() === "") {
       return;
@@ -17,9 +20,9 @@ export default function CreatePost({ onAddPost }) {
         <form onSubmit={handleSubmit}>
           <textarea
             className="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-blue-500 transition-colors resize-none"
-            rows="3"
+            rows={3}
             placeholder="What's on your mind?"
-            value={text} 
+            value={text}
             onChange={(e) => setText(e.target.value)}
           ></textarea>
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-export default function useFetch(url) {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+export default function useFetch<T>(url: string) {
+  const [data, setData] = useState<T | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -11,9 +11,9 @@ export default function useFetch(url) {
         const response = await fetch(url);
 
         if (!response.ok) {
-          throw new Error("an error accured", Error);
+          throw new Error("an error accured");
         }
-        const dataSet = await response.json();
+        const dataSet = (await response.json()) as T;
         setData(dataSet);
         setIsError(false);
         setIsLoading(false);
@@ -24,7 +24,9 @@ export default function useFetch(url) {
         setIsLoading(false);
       }
     };
-    fetchNews();
+    if (url) {
+      fetchNews();
+    }
   }, [url]);
   return { data, isError, isLoading };
 }

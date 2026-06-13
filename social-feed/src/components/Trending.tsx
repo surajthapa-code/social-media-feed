@@ -1,6 +1,18 @@
 import { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 
+interface HNArticle {
+  objectID: string;
+  url: string;
+  title: string;
+  points: number;
+  author: string;
+}
+
+interface HNResponse {
+  hits: HNArticle[];
+}
+
 function Trending() {
   const [searchInput, setSearchInput] = useState("Stock market");
 
@@ -21,7 +33,7 @@ function Trending() {
     return () => clearTimeout(delayedFetch);
   }, [searchInput]);
 
-  const { data: rawData, isError, isLoading } = useFetch(searchUrl);
+  const { data: rawData, isError, isLoading } = useFetch<HNResponse>(searchUrl);
   const news = rawData && rawData.hits ? rawData.hits.slice(0, 10) : [];
   return (
     <div className="flex flex-col">
@@ -52,7 +64,7 @@ function Trending() {
 
       {!isLoading && !isError && (
         <ul className="flex flex-col gap-3">
-          {news.map((article) => (
+          {news.map((article: HNArticle) => (
             <li key={article.objectID}>
               <a
                 href={article.url}
