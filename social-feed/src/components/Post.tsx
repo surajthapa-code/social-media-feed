@@ -41,7 +41,7 @@ export default function Post({ data, onLike, onDelete }: postProps) {
           onClick={onLike}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-gray-400 hover:text-pink-400 hover:bg-gray-700/60 transition-all duration-200"
         >
-          <span>❤️</span>
+          <span>👍🏻</span>
           <span>{data.likes}</span>
         </button>
 
