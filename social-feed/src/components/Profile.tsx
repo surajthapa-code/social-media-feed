@@ -14,7 +14,7 @@ export default function Profile() {
         </div>
       </div>
       <p className="text-gray-300">
-        This is where our user details and personal posts will live.
+        hello user
       </p>
     </div>
   );
