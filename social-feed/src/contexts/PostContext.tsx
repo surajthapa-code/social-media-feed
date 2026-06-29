@@ -29,28 +29,89 @@ const initialPosts = [
     id: 1,
     user: "Peter Parker",
     avatarInitial: "P",
-    time: "2 hours ago",
+    time: "2h",
     content:
-      "This is my first static post on my new platform! Preparing for the full-stack MERN integration.",
-    likes: 0,
+      "Finally deployed my first full-stack MERN app today. Seeing your project live on the internet feels different.",
+    likes: 42,
   },
   {
     id: 2,
     user: "Tony Stark",
     avatarInitial: "T",
-    time: "4 hours ago",
+    time: "4h",
     content:
-      "Just finished building a new AI cluster. React 19 compiler is looking incredibly optimized.",
-    likes: 3000,
+      "React 19 compiler is genuinely impressive. Automatic optimizations are reducing unnecessary re-renders significantly.",
+    likes: 3120,
   },
   {
     id: 3,
     user: "Bruce Wayne",
     avatarInitial: "B",
-    time: "1 day ago",
+    time: "8h",
+    content: "Dark mode isn't a feature anymore. It's a requirement.",
+    likes: 845,
+  },
+  {
+    id: 4,
+    user: "Natasha Romanoff",
+    avatarInitial: "N",
+    time: "10h",
     content:
-      "Dark mode is the only acceptable UI theme. Good job on the Tailwind setup.",
-    likes: 104,
+      "Spent three hours debugging a missing semicolon. The bug was one character long.",
+    likes: 532,
+  },
+  {
+    id: 5,
+    user: "Steve Rogers",
+    avatarInitial: "S",
+    time: "12h",
+    content:
+      "Consistency beats motivation. Solved two DSA problems today even though I wasn't feeling productive.",
+    likes: 728,
+  },
+  {
+    id: 6,
+    user: "Miles Morales",
+    avatarInitial: "M",
+    time: "15h",
+    content:
+      "Anyone else learning TypeScript after JavaScript? The type errors hurt at first, but the code feels much safer.",
+    likes: 211,
+  },
+  {
+    id: 7,
+    user: "Wanda Maximoff",
+    avatarInitial: "W",
+    time: "18h",
+    content:
+      "AI won't replace developers. Developers who know how to use AI effectively will replace those who don't.",
+    likes: 1940,
+  },
+  {
+    id: 8,
+    user: "Clark Kent",
+    avatarInitial: "C",
+    time: "1d",
+    content:
+      "Started reading system design concepts today. It's amazing how much happens behind a simple 'Send' button.",
+    likes: 483,
+  },
+  {
+    id: 9,
+    user: "Diana Prince",
+    avatarInitial: "D",
+    time: "1d",
+    content:
+      "Good UI is invisible. Users notice bad design much faster than good design.",
+    likes: 961,
+  },
+  {
+    id: 10,
+    user: "Loki",
+    avatarInitial: "L",
+    time: "2d",
+    content: "Merged directly into main. Chaos is a ladder.",
+    likes: 1720,
   },
 ];
 export const PostContext = createContext<PostContextType | undefined>(
