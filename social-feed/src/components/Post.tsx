@@ -1,3 +1,5 @@
+import { Heart, MessageCircle, Trash2 } from "lucide-react";
+
 interface PostData {
   id: number;
   user: string;
@@ -41,12 +43,12 @@ export default function Post({ data, onLike, onDelete }: postProps) {
           onClick={onLike}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-gray-400 hover:text-pink-400 hover:bg-gray-700/60 transition-all duration-200"
         >
-          <span>👍🏻</span>
+          <Heart size={18} />
           <span>{data.likes}</span>
         </button>
 
         <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-gray-400 hover:text-blue-400 hover:bg-gray-700/60 transition-all duration-200">
-          <span>💬</span>
+          <MessageCircle size={18} />
           <span>Comment</span>
         </button>
 
@@ -54,7 +56,7 @@ export default function Post({ data, onLike, onDelete }: postProps) {
           onClick={onDelete}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-gray-400 hover:text-red-400 hover:bg-gray-700/60 transition-all duration-200 ml-auto"
         >
-          <span>🗑️</span>
+          <Trash2 size={18} />
           <span>Delete</span>
         </button>
       </div>
